@@ -1,4 +1,10 @@
 # Descrizione
+Esercizio di oggi: PHP iscrizione newsletter
+
+1. Controllare ch el'email passata in GET sia ben formattata e contenga '.' e '@'
+
+2. Se è corretta stampare un messaggio di success in un alert di Bootstrap, latrimenti (sempre in n alert di Bootstrap) mostrare un messaggio di errore.
+
 
 ## Milestone 1: 
 - scriviamo tutto (logica e layout) in un unico file index.php
