@@ -20,9 +20,15 @@ $messageValidation = emailCheck($email);
 function generateAlertValidation($messageValidation)
 {
     if ($messageValidation) {
-        return 'OK';
+        return [
+            'text' => 'Email not valid',
+            'alert' => 'alert-success'
+        ];
     } else {
-        return 'NOP';
+        return [
+            'text' => 'Email not valid',
+            'alert' => 'alert-danger',
+        ];
     }
 };
 
@@ -49,14 +55,14 @@ $message = generateAlertValidation($messageValidation);
     </header>
     <main>
         <h2>Iscriviti alla nostra Newsletter</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis blanditiis magnam placeat aliquam. Voluptatibus reiciendis alias non deserunt tempore totam a. Tempora, repudiandae quas autem, dolore consectetur excepturi dolores, expedita quasi a sit quae! Praesentium repellat eligendi necessitatibus cum repudiandae dolor enim ipsum quidem! Earum nemo aliquam voluptas ducimus rem!</p>
         <!-- form -->
         <form action="#" method="get">
-            <input type="text" name="name" id="name" placeholder="Inserisci nome e cognome">
             <input type="email" name="email" id="email" placeholder="Inserisci la tua email">
             <button type="submit">Invia</button>
         </form>
-        <div>
-            <p><?php echo $message ?></p>
+        <div class="alert <?php echo $message['alert'] ?> ">
+            <p><?php echo $message['text'] ?></p>
         </div>
         <!-- Alert validation -->
 
