@@ -23,3 +23,6 @@ invece di visualizzare il messaggio di success nella index.php, in caso di esito
 ## Milestone 5: 
 
 sullo stesso stile del metodo old() di Laravel, far vedere come utilizzare $_GET per valorizzare il campo di input in caso il controllo del server dia esito negativo (KO)
+
+<!-- old() è una funziona che salva il valore e in caso in cui l'invio della form non va a buon fine si usa per mostrare di nuovo quel valore nel input cosi non è perso quello che l'utente ha inserito nel campo (e non lo facciamo arrabbiare ma solo correggere il dato e riinviare)
+Ora nel nostro caso il tutto avviene nella stesso file, quindi utilizzando una variabile siete in grado di farlo. -->
