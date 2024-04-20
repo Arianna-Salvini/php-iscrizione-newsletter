@@ -1,38 +1,45 @@
 <?php
-$email = $_GET["email"];
+$email = ($_GET["email"]) ?? '';
 
-// Function for email validation
+$message = null; //Add null message to avoid undefine warning
 
-function emailCheck($email)
-{
-    if (str_contains($email, '.') && str_contains($email, '@')) {
-        return true;
-    } else {
-        return false;
+// Add condition to avoi alert at first loading of the page 
+if (!empty($email)) {
+
+    // Function for email validation -> string has to contain '.' and '@'
+    function emailCheck($email)
+    {
+        if (str_contains($email, '.') && str_contains($email, '@')) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    // Alert response
+
+    // Store reslt of email validation 
+    $messageValidation = emailCheck($email);
+
+    // Function to creat alert related responce with text and bootstrap class for each condition
+    function generateAlertValidation($messageValidation)
+    {
+        if ($messageValidation) {
+            return [
+                'text' => 'Email valid',
+                'alert' => 'alert-success'
+            ];
+        } else {
+            return [
+                'text' => 'Email not valid',
+                'alert' => 'alert-danger',
+            ];
+        }
+    };
+
+    // Store the result of function to have easy access after in code
+    $message = generateAlertValidation($messageValidation);
 }
-
-// Alert response
-
-$messageValidation = emailCheck($email);
-
-function generateAlertValidation($messageValidation)
-{
-    if ($messageValidation) {
-        return [
-            'text' => 'Email not valid',
-            'alert' => 'alert-success'
-        ];
-    } else {
-        return [
-            'text' => 'Email not valid',
-            'alert' => 'alert-danger',
-        ];
-    }
-};
-
-$message = generateAlertValidation($messageValidation);
-
 ?>
 
 <!DOCTYPE html>
@@ -53,26 +60,39 @@ $message = generateAlertValidation($messageValidation);
             Newsletter
         </nav>
     </header>
+    <!-- /Header -->
+
     <main class="text-center my-5 d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 160px);">
-        <div class="container">
+        <div class="container position-relative">
+
+            <!-- Alert validation massage for email input with close alert button -->
+            <!-- Add if statement in rorder to eliminate the warning and ensure code work even if $message is null
+            (check th if php syntax)  -->
+            <?php if ($message !== null) : ?>
+                <div class="alert <?php echo $message['alert'] ?> z-1 d-flex justify-content-center position-sticky ">
+                    <p><?php echo $message['text'] ?></p>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+
+            <!--Nesletter page -->
             <h2 class="text-primary-emphasis ">Iscriviti alla nostra Newsletter</h2>
             <p class="my-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis blanditiis magnam placeat aliquam. Voluptatibus reiciendis alias non deserunt tempore totam a. Tempora, repudiandae quas autem, dolore consectetur excepturi dolores, expedita quasi a sit quae! Praesentium repellat eligendi necessitatibus cum repudiandae dolor enim ipsum quidem! Earum nemo aliquam voluptas ducimus rem!</p>
-            <!-- form -->
+
+            <!-- Form -->
             <form class="mt-4 pb-3 d-flex justify-content-center" action="#" method="get">
-                <input type="email" name="email" id="email" placeholder="Inserisci la tua email" class="rounded px-4 py-1">
+                <!-- Change type of input from email to text in order to show the "not valid" alert an to see if pho check email works -->
+                <input type="text" name="email" id="email" placeholder="Inserisci la tua email" class="rounded px-4 py-1">
                 <button type="submit" class="btn btn-outline-primary rounded">Invia</button>
             </form>
-            <div class="alert <?php echo $message['alert'] ?>  d-flex justify-content-center">
-                <p><?php echo $message['text'] ?></p>
-                <button type="button" class="btn-close"></button>
-            </div>
-            <!-- Alert validation -->
         </div>
-
     </main>
+    <!-- /Main -->
+
     <footer class="py-3 bg-primary fixed-bottom">
         <div class="container text-light">Boolean © by Classe 119</div>
     </footer>
+    <!-- /Footer -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
