@@ -76,14 +76,15 @@ if (!empty($email)) {
                 </div>
             <?php endif; ?>
 
-            <!--Nesletter page -->
+            <!--Newsletter page -->
             <h2 class="text-primary-emphasis ">Iscriviti alla nostra Newsletter</h2>
             <p class="my-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis blanditiis magnam placeat aliquam. Voluptatibus reiciendis alias non deserunt tempore totam a. Tempora, repudiandae quas autem, dolore consectetur excepturi dolores, expedita quasi a sit quae! Praesentium repellat eligendi necessitatibus cum repudiandae dolor enim ipsum quidem! Earum nemo aliquam voluptas ducimus rem!</p>
 
             <!-- Form -->
             <form class="mt-4 pb-3 d-flex justify-content-center" action="#" method="get">
                 <!-- Change type of input from email to text in order to show the "not valid" alert an to see if pho check email works -->
-                <input type="text" name="email" id="email" placeholder="Inserisci la tua email" class="rounded px-4 py-1">
+                <!-- Add htmlspecialchars function to mantain integrity of user's input until ensure user's input is correct. It also good for security. Prevet attackers from exploiting the code (see W3S)-->
+                <input type="text" name="email" id="email" placeholder="Inserisci la tua email" class="rounded px-4 py-1" value="<?php echo htmlspecialchars($email); ?> ">
                 <button type="submit" class="btn btn-outline-primary rounded">Invia</button>
             </form>
         </div>
