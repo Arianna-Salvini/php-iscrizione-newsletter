@@ -27,7 +27,8 @@ if (!empty($email)) {
         if ($messageValidation) {
             return [
                 'text' => 'Email valid',
-                'alert' => 'alert-success'
+                'alert' => 'alert-success',
+                header('Location: ./models/thankyou.php'),
             ];
         } else {
             return [
